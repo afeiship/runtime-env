@@ -34,10 +34,6 @@ const IOS_REGEX = /(iphone|ipad|ipod)/;
 // Android 设备检测正则 (匹配 Android 设备，排除 Chrome Mobile)
 const ANDROID_REGEX = /android(?!.*chrome\/[.\d]* mobile)/;
 
-const RUNTIME_CACHE = {
-  value: null
-};
-
 // ----- ALO7 APP UA LIST -----
 // Alo7Student/2.25.3 (iOS/17.2.1; Apple/iPhone SE 2nd Gen; zh_cn)
 // AXT_TEACHER/2.37.2.4687 (iPhone12,8; iOS 17.2.1)
