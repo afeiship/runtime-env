@@ -1,6 +1,6 @@
 {
   "name": "@jswork/runtime-env",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Runtime-env is a JS library for detecting environments like Web, WeChat MiniProgram, and JSSDK.",
   "npmClient": "pnpm",
   "main": "dist/index.cjs.js",
@@ -36,16 +36,11 @@
   },
   "homepage": "https://js.work",
   "keywords": [
-    "git",
-    "url",
-    "cli",
-    "ssh",
-    "actions",
-    "pipline",
-    "github",
-    "gitlab",
-    "pages",
-    "guc",
-    "deprecated"
+    "alo7",
+    "env",
+    "miniprogram",
+    "mp",
+    "runtime",
+    "wechat"
   ]
 }
