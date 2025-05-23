@@ -20,9 +20,24 @@ type RunTimeEnv =
   | 'UNKNOWN';
 
 declare const wx: any;
+
+// ----- ALO7 APP UA LIST -----
+// Alo7Student/2.25.3 (iOS/17.2.1; Apple/iPhone SE 2nd Gen; zh_cn)
+// AXT_TEACHER/2.37.2.4687 (iPhone12,8; iOS 17.2.1)
+// Alo7Student/2.25.2 (Android/15; google/sdk_gphone64_arm64; zh_CN)
+// AXT_TEACHER/2.40.0 (google sdk_gphone64_arm64; Android 15)
+
 const runtimeEnv = (): RunTimeEnv => {
+  let isIOS = false;
+  let isAndroid = false;
+  let isStudent = false;
+  let isTeacher = false;
+  let isWX = false;
+
+  if (typeof wx !== 'undefined') isWX = true;
+
   // 判断是否运行在微信小程序中
-  if (typeof wx !== 'undefined' && wx.getSystemInfoSync) {
+  if (isWX && wx.getSystemInfoSync) {
     const systemInfo = wx.getSystemInfoSync();
     if (systemInfo && systemInfo.platform === 'devtools') {
       return 'WX_DEVTOOLS';
@@ -32,34 +47,36 @@ const runtimeEnv = (): RunTimeEnv => {
   }
 
   // 企业微信
-  if (typeof wx !== 'undefined' && wx.qy) {
-    return 'WX_WXWORK';
-  }
+  if (isWX && wx.qy) return 'WX_WXWORK';
 
   // 判断是否运行在微信 JSSDK 环境中
-  if (typeof wx !== 'undefined' && typeof wx.miniProgram !== 'undefined') {
+  if (isWX && typeof wx.miniProgram !== 'undefined') {
     return 'WX_WEB';
   }
 
+  if (typeof navigator !== 'undefined' && navigator.userAgent) {
+    const ua = navigator.userAgent.toLowerCase();
+    isIOS = ua.indexOf('ios ') !== -1;
+    isAndroid = ua.indexOf('android ') !== -1;
+    isStudent = ua.indexOf('alo7student') !== -1;
+    isTeacher = ua.indexOf('axt_teacher') !== -1;
+  }
+
   // Alo7Student/2.25.3 (iOS/17.2.1; Apple/iPhone SE 2nd Gen; zh_cn)
-  if (
-    typeof navigator !== 'undefined' &&
-    navigator.userAgent &&
-    navigator.userAgent.startsWith('Alo7Student')
-  ) {
-    return 'ALO7_APP_STUDENT_IOS';
-  }
-
-  // AXT_TEACHER/2.40.1.4705 (iPhone12,8; iOS 17.2.1)
-  if (
-    typeof navigator !== 'undefined' &&
-    navigator.userAgent &&
-    navigator.userAgent.startsWith('AXT_TEACHER')
-  ) {
-    return 'ALO7_APP_TEACHER_IOS';
-  }
-
   // AXT_TEACHER/2.37.2.4687 (iPhone12,8; iOS 17.2.1)
+
+  // Alo7Student/2.25.2 (Android/15; google/sdk_gphone64_arm64; zh_CN)
+  // AXT_TEACHER/2.40.0 (google sdk_gphone64_arm64; Android 15)
+
+  if (isIOS) {
+    if (isStudent) return 'ALO7_APP_STUDENT_IOS';
+    if (isTeacher) return 'ALO7_APP_TEACHER_IOS';
+  }
+
+  if (isAndroid) {
+    if (isStudent) return 'ALO7_APP_STUDENT_ANDROID';
+    if (isTeacher) return 'ALO7_APP_TEACHER_ANDROID';
+  }
 
   // 判断是否运行在普通的 Web 环境中
   if (typeof window !== 'undefined' && typeof document !== 'undefined') {
