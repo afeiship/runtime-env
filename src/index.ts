@@ -21,6 +21,11 @@ type RunTimeEnv =
 
 declare const wx: any;
 
+// iOS 设备检测正则 (匹配 iPhone/iPad/iPod)
+const IOS_REGEX = /(iphone|ipad|ipod)/;
+// Android 设备检测正则 (匹配 Android 设备，排除 Chrome Mobile)
+const ANDROID_REGEX = /android(?!.*chrome\/[.\d]* mobile)/;
+
 // ----- ALO7 APP UA LIST -----
 // Alo7Student/2.25.3 (iOS/17.2.1; Apple/iPhone SE 2nd Gen; zh_cn)
 // AXT_TEACHER/2.37.2.4687 (iPhone12,8; iOS 17.2.1)
@@ -56,17 +61,11 @@ const runtimeEnv = (): RunTimeEnv => {
 
   if (typeof navigator !== 'undefined' && navigator.userAgent) {
     const ua = navigator.userAgent.toLowerCase();
-    isIOS = ua.indexOf('ios ') !== -1;
-    isAndroid = ua.indexOf('android ') !== -1;
+    isIOS = IOS_REGEX.test(ua);
+    isAndroid = ANDROID_REGEX.test(ua);
     isStudent = ua.indexOf('alo7student') !== -1;
     isTeacher = ua.indexOf('axt_teacher') !== -1;
   }
-
-  // Alo7Student/2.25.3 (iOS/17.2.1; Apple/iPhone SE 2nd Gen; zh_cn)
-  // AXT_TEACHER/2.37.2.4687 (iPhone12,8; iOS 17.2.1)
-
-  // Alo7Student/2.25.2 (Android/15; google/sdk_gphone64_arm64; zh_CN)
-  // AXT_TEACHER/2.40.0 (google sdk_gphone64_arm64; Android 15)
 
   if (isIOS) {
     if (isStudent) return 'ALO7_APP_STUDENT_IOS';
