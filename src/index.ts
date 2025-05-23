@@ -5,7 +5,7 @@ type RunTimeEnv =
   | 'WX_MINI_PROGRAM'
   // 微信 Web
   | 'WX_WEB'
-  // 微信小程序 WebView
+  // 微信小程序 WebView 环境
   | 'WX_MINI_PROGRAM_WEBVIEW'
   // 企业微信
   | 'WX_WXWORK'
@@ -48,22 +48,6 @@ const runtimeEnv = (): RunTimeEnv => {
   let isWX = false;
 
   if (typeof wx !== 'undefined') isWX = true;
-
-  // 判断是否运行在微信小程序中
-  if (isWX && wx.getSystemInfoSync) {
-    const systemInfo = wx.getSystemInfoSync();
-    if (systemInfo && systemInfo.platform === 'devtools') {
-      return 'WX_DEVTOOLS';
-    } else if (systemInfo && (systemInfo.platform === 'ios' || systemInfo.platform === 'android')) {
-      return 'WX_MINI_PROGRAM';
-    }
-  }
-
-  // 企业微信
-  if (isWX && wx.qy) return 'WX_WXWORK';
-  if (isWX && global.__wxjs_environment === 'miniprogram') return 'WX_MINI_PROGRAM_WEBVIEW';
-  if (isWX && typeof wx.miniProgram !== 'undefined') return 'WX_WEB';
-
   if (typeof navigator !== 'undefined' && navigator.userAgent) {
     const ua = navigator.userAgent.toLowerCase();
     isIOS = IOS_REGEX.test(ua);
@@ -81,6 +65,21 @@ const runtimeEnv = (): RunTimeEnv => {
     if (isStudent) return 'ALO7_APP_STUDENT_ANDROID';
     if (isTeacher) return 'ALO7_APP_TEACHER_ANDROID';
   }
+
+  // 判断是否运行在微信小程序中
+  if (isWX && wx.getSystemInfoSync) {
+    const systemInfo = wx.getSystemInfoSync();
+    if (systemInfo && systemInfo.platform === 'devtools') {
+      return 'WX_DEVTOOLS';
+    } else if (systemInfo && (systemInfo.platform === 'ios' || systemInfo.platform === 'android')) {
+      return 'WX_MINI_PROGRAM';
+    }
+  }
+
+  // 企业微信
+  if (isWX && wx.qy) return 'WX_WXWORK';
+  if (isWX && global.__wxjs_environment === 'miniprogram') return 'WX_MINI_PROGRAM_WEBVIEW';
+  if (isWX && typeof wx.miniProgram !== 'undefined') return 'WX_WEB';
 
   // 判断是否运行在普通的 Web 环境中
   if (typeof window !== 'undefined' && typeof document !== 'undefined') {
