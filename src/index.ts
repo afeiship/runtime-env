@@ -5,6 +5,8 @@ type RunTimeEnv =
   | 'WX_MINI_PROGRAM'
   // 微信 Web
   | 'WX_WEB'
+  // 微信小程序 WebView
+  | 'WX_MINI_PROGRAM_WEBVIEW'
   // 企业微信
   | 'WX_WXWORK'
   // 普通的Web
@@ -20,6 +22,12 @@ type RunTimeEnv =
   | 'UNKNOWN';
 
 declare const wx: any;
+
+declare global {
+  interface Window {
+    __wxjs_environment?: 'miniprogram' | string;
+  }
+}
 
 // iOS 设备检测正则 (匹配 iPhone/iPad/iPod)
 const IOS_REGEX = /(iphone|ipad|ipod)/;
@@ -53,11 +61,8 @@ const runtimeEnv = (): RunTimeEnv => {
 
   // 企业微信
   if (isWX && wx.qy) return 'WX_WXWORK';
-
-  // 判断是否运行在微信 JSSDK 环境中
-  if (isWX && typeof wx.miniProgram !== 'undefined') {
-    return 'WX_WEB';
-  }
+  if (isWX && global.__wxjs_environment === 'miniprogram') return 'WX_MINI_PROGRAM_WEBVIEW';
+  if (isWX && typeof wx.miniProgram !== 'undefined') return 'WX_WEB';
 
   if (typeof navigator !== 'undefined' && navigator.userAgent) {
     const ua = navigator.userAgent.toLowerCase();
