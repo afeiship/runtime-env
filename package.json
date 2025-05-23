@@ -1,40 +1,43 @@
 {
-  "name": "@jswork/git-url-cli",
-  "version": "1.0.4",
-  "description": "Get git http/https/ssh/git url.",
-  "homepage": "https://github.com/afeiship/git-url-cli",
-  "author": {
-    "name": "afeiship",
-    "email": "1290657123@qq.com"
-  },
-  "bin": {
-    "guc": "bin/index.js"
+  "name": "@jswork/runtime-env",
+  "version": "1.0.0",
+  "description": "Runtime-env is a JS library for detecting environments like Web, WeChat MiniProgram, and JSSDK.",
+  "npmClient": "pnpm",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "src",
+    "dist",
+    "global.d.ts"
+  ],
+  "prettier": "@jswork/style-guide/prettier",
+  "scripts": {
+    "build": "tsup",
+    "test": "bun test",
+    "release": "release-it"
   },
   "license": "MIT",
+  "devDependencies": {
+    "@jswork/style-guide": "^1.0.3",
+    "@jswork/tsup-banner": "^1.0.4",
+    "@swc/core": "^1.5.5",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.12.11",
+    "esbuild-plugin-replace": "^1.4.0",
+    "esbuild-plugin-umd-wrapper": "^3.0.0",
+    "prettier": "^3.3.3",
+    "tsup": "^8.2.4",
+    "typescript": "^4.9.5"
+  },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
   },
-  "dependencies": {
-    "@jswork/next": "^1.0.4",
-    "@jswork/next-git-url": "^1.0.3",
-    "@jswork/next-intersection": "^1.0.0",
-    "@jswork/next-pick-by": "^1.0.0",
-    "yargs": "^16.2.0",
-    "yargs-parser": "^21.1.1"
-  },
+  "homepage": "https://js.work",
   "keywords": [
-    "git",
-    "url",
-    "cli",
-    "ssh",
-    "actions",
-    "pipline",
-    "github",
-    "gitlab",
-    "pages"
-  ],
-  "scripts": {
-    "release": "release-it"
-  }
+    "runtime-env",
+    "number",
+    "num"
+  ]
 }

@@ -1,64 +1,36 @@
-# git-url-cli
-> Get git http/https/ssh/git url.
+# runtime-env
+> Runtime-env is a JS library for detecting environments like Web, WeChat MiniProgram, and JSSDK.
 
 [![version][version-image]][version-url]
 [![license][license-image]][license-url]
+[![size][size-image]][size-url]
 [![download][download-image]][download-url]
-
 
 ## installation
 ```shell
-npm i -g @jswork/git-url-cli
+yarn add @jswork/runtime-env
 ```
 
 ## usage
-```shell
-guc
-# https://github.com/afeiship/git-url-cli
+```js
+import runtimeEnv from '@jswork/runtime-env';
 
-# open the `url`
-open `guc -u`
+runtimeEnv(1024);
+
+// [1000, 0, 20, 4]
 ```
-~~~
-Options:
-  --version      Show version number                                   [boolean]
-  --url, -u      Github/gitlab url.                                    [boolean]
-  --ssh, -s      Show `ssh` git url.                                   [boolean]
-  --https, -h    Show `https` git url.                                 [boolean]
-  --pages, -p    Show `gh_pages/pages` in github/gitlab.               [boolean]
-  --mr, -m       Show `merge request url` in gitlab.                   [boolean]
-  --actions, -a  Show `actions/piplines` in github/gitlab.             [boolean]
-  --help         Show help                                             [boolean]
-~~~
-
-```shell
-$ guc -u
-# https://github.com/afeiship/git-url-cli
-
-$ guc -h
-# https://github.com/afeiship/git-url-cli.git
-
-$ guc -s
-# git@github.com:afeiship/git-url-cli.git
-
-$ guc -p
-# https://afeiship.github.io/git-url-cli/
-
-$ guc -a
-# https://github.com/afeiship/git-url-cli/actions/new
-```
-
-## resources
-- https://developer.okta.com/blog/2019/06/18/command-line-app-with-nodejs
 
 ## license
-Code released under [the MIT license](https://github.com/afeiship/git-url-cli/blob/master/LICENSE.txt).
+Code released under [the MIT license](https://github.com/afeiship/runtime-env/blob/master/LICENSE.txt).
 
-[version-image]: https://img.shields.io/npm/v/@jswork/git-url-cli
-[version-url]: https://npmjs.org/package/@jswork/git-url-cli
+[version-image]: https://img.shields.io/npm/v/@jswork/runtime-env
+[version-url]: https://npmjs.org/package/@jswork/runtime-env
 
-[license-image]: https://img.shields.io/npm/l/@jswork/git-url-cli
-[license-url]: https://github.com/afeiship/git-url-cli/blob/master/LICENSE.txt
+[license-image]: https://img.shields.io/npm/l/@jswork/runtime-env
+[license-url]: https://github.com/afeiship/runtime-env/blob/master/LICENSE.txt
 
-[download-image]: https://img.shields.io/npm/dm/@jswork/git-url-cli
-[download-url]: https://www.npmjs.com/package/@jswork/git-url-cli
+[size-image]: https://img.shields.io/bundlephobia/minzip/@jswork/runtime-env
+[size-url]: https://github.com/afeiship/runtime-env/blob/master/dist/runtime-env.min.js
+
+[download-image]: https://img.shields.io/npm/dm/@jswork/runtime-env
+[download-url]: https://www.npmjs.com/package/@jswork/runtime-env
