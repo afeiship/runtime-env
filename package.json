@@ -36,8 +36,16 @@
   },
   "homepage": "https://js.work",
   "keywords": [
-    "runtime-env",
-    "number",
-    "num"
+    "git",
+    "url",
+    "cli",
+    "ssh",
+    "actions",
+    "pipline",
+    "github",
+    "gitlab",
+    "pages",
+    "guc",
+    "deprecated"
   ]
 }

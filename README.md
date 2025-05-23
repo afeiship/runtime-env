@@ -7,7 +7,7 @@
 [![download][download-image]][download-url]
 
 ## installation
-```shell
+```bash
 yarn add @jswork/runtime-env
 ```
 
@@ -15,9 +15,20 @@ yarn add @jswork/runtime-env
 ```js
 import runtimeEnv from '@jswork/runtime-env';
 
-runtimeEnv(1024);
+// 获取当前运行环境
+const env = runtimeEnv();
 
-// [1000, 0, 20, 4]
+// 可能的返回值：
+// - 'WEB' - 普通网页环境
+// - 'WX_MINI_PROGRAM' - 微信小程序
+// - 'WX_DEVTOOLS' - 微信开发者工具
+// - 'WX_WXWORK' - 企业微信
+// - 'WX_WEB' - 微信网页
+// - 'ALO7_APP_STUDENT_IOS' - ALO7 学生端 iOS App
+// - 'ALO7_APP_STUDENT_ANDROID' - ALO7 学生端 Android App
+// - 'ALO7_APP_TEACHER_IOS' - ALO7 教师端 iOS App
+// - 'ALO7_APP_TEACHER_ANDROID' - ALO7 教师端 Android App
+// - 'UNKNOWN' - 未知环境
 ```
 
 ## license

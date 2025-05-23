@@ -1,5 +1,7 @@
 import runtimeEnv from '../src';
 
+declare const global: any;
+
 describe('Normal test cases', () => {
   beforeEach(() => {
     // 清除全局对象
