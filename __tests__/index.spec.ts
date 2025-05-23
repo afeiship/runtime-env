@@ -1,6 +1,11 @@
-import fn from '../src';
+import runtimeEnv from '../src';
 
 describe('Normal test cases', () => {
-  test('number is equal 0/10/100/1000/10000', () => {
-  });
+  test('simulte wx.qy.env', () => {});
+  test('simulte wx miniprogram', () => {});
+  test('simulte wx web', () => {});
+  test('simulte alo7 ios teacher', () => {});
+  test('simulte alo7 ios student', () => {});
+  test('simulte alo7 android student', () => {});
+  test('simulte alo7 android student', () => {});
 });
