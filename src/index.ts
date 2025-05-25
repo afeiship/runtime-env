@@ -78,6 +78,8 @@ const runtimeEnv = (): RunTimeEnv => {
 
   // 企业微信
   if (isWX && wx.qy) return 'WX_WXWORK';
+
+  // todo: 这2个有可能是同一种情况，具体待测试
   if (isWX && global.__wxjs_environment === 'miniprogram') return 'WX_MINI_PROGRAM_WEBVIEW';
   if (isWX && typeof wx.miniProgram !== 'undefined') return 'WX_WEB';
 
